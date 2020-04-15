@@ -26,10 +26,10 @@ public class Logginn {
         String logginnNavn = brukernavn.getText();
         String logginnPassord = passord.getText();
         if(logginnNavn.equals(brukernavnAdmin) && logginnPassord.equals(passordAdmin)){
-            App.changeView("admin");
+            App.changeView("admin.fxml");
         }
         else if(logginnNavn.equals(brukernavnBruker) && logginnPassord.equals(passordBruker)){
-            App.changeView("handlekurv");
+            App.changeView("handlekurv.fxml");
         }
 //logger man inn som bruker havner man i handlekurven!
  //Logger man inn som admin havner man i adminsiden!

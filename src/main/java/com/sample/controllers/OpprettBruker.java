@@ -36,7 +36,7 @@ public class OpprettBruker {
     //Hvis man allerede har bruker
     @FXML
     void SwitchToLogginn(ActionEvent event) throws IOException {
-        App.changeView("login");
+        App.changeView("login.fxml");
     }
 
     //Registrer knappen
@@ -44,7 +44,7 @@ public class OpprettBruker {
     private void switchToHandleKurv() throws IOException {
         Bruker enbruker = new Bruker();
 
-        App.changeView("handlekurv");
+        App.changeView("handlekurv.fxml");
     }
 
 }

@@ -16,13 +16,13 @@ public class MainController {
 
     @FXML
     void switchAdmin(ActionEvent event) throws IOException {
-        App.changeView("login");
+        App.changeView("logginn.fxml");
 
     }
 
     @FXML
     void switchOpprettBruker(ActionEvent event) throws IOException{
-        App.changeView("opprettbruker");
+        App.changeView("opprettbruker.fxml");
 
     }
 
