@@ -10,25 +10,12 @@ import java.util.regex.Pattern;
 
 public class BrukerValid {
     public static void navnValidering(String navn)  throws InvalidBrukerException {
-        if(!Pattern.matches("[A-ZÅÆØ][a-zåæø]* [A-ZÅÆØ][a-zåæø]*",navn)){
+        if(!Pattern.matches("^[a-zA-ZæøåÆØÅ. \\-]{2,20}$",navn)){
             throw new InvalidBrukerException("Du må skrive inn gyldig navn");
         }
 
     }
-    public static void epostValidering(String epost) throws InvalidEpostException{
-        if(!Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+" +
-                "[a-zA-Z]{2,6}$", epost)){
-            throw new InvalidEpostException("Du må skrive inn gydlig epost");
-        }
-    }
-    public static void brukernavnValidering(String brukernavn) throws InvalidBrukernavnException{
-        if(!Pattern.matches("^[a-zA-Z0-9](_(?![_.])|\\.(?![_.])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$", brukernavn)){
-            throw new InvalidBrukernavnException("Du må skrive inn gyldig brukernavn");
-        }
-    }
-    public static void passwordValidering(String password) throws InvalidPasswordException{
 
-    }
 
 
 }
