@@ -13,8 +13,7 @@ public class Datamaskin implements Serializable {
     private SimpleStringProperty mus;
     private SimpleStringProperty skjerm;
 
-    public Datamaskin(){
-    }
+
 
     public Datamaskin(SimpleStringProperty prosessor, SimpleStringProperty skjermkort, SimpleStringProperty minne,
                       SimpleStringProperty harddisk, SimpleStringProperty tastatur, SimpleStringProperty mus,
@@ -111,4 +110,6 @@ public class Datamaskin implements Serializable {
     public void setSkjerm(String skjerm) {
         this.skjerm.set(skjerm);
     }
+
+
 }
