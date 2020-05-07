@@ -27,6 +27,7 @@ public class Logginn {
         if(logginnNavn.equals(brukernavnAdmin) && logginnPassord.equals(passordAdmin)){
             App.changeView("admin.fxml");
         }
+
         }
 //logger man inn som bruker havner man i handlekurven!
  //Logger man inn som admin havner man i adminsiden!
