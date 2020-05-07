@@ -22,7 +22,7 @@ public class MainController {
 
     @FXML
     void switchOpprettBruker(ActionEvent event) throws IOException{
-        App.changeView("opprettbruker.fxml");
+        App.changeView("velgkomponenter.fxml");
 
     }
 
