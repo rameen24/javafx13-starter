@@ -42,10 +42,10 @@ public class Admin {
     private TableColumn<Datamaskin, Integer> priscol;
 
     @FXML
-    private TextField søkefelt;
+    private TextField sokefelt;
 
     @FXML
-    void søkbtn(ActionEvent event) {}
+    void sokbtn(ActionEvent event) {}
 
 
     @FXML
@@ -132,17 +132,17 @@ public class Admin {
 
 
         FilteredList<Produkter> filteredList = new FilteredList<>(collection.enMaskin, b -> true);
-        søkefelt.textProperty().addListener((observable,oldValue,newValue)->{
+        sokefelt.textProperty().addListener((observable,oldValue,newValue)->{
             filteredList.setPredicate(produktobjekt->{
                 if(newValue == null || newValue.isEmpty()){
                     return true;
                 }
-                String søktxt = newValue;
+                String soktxt = newValue;
                 int pris = 0;
-                if(Pattern.matches("[0-9]*",søktxt)) {
+                if(Pattern.matches("[0-9]*",soktxt)) {
 
                     try {
-                        pris = Integer.parseInt(søktxt);
+                        pris = Integer.parseInt(soktxt);
                     } catch (NumberFormatException e) {
                         System.err.println(e.getMessage());
                     }
