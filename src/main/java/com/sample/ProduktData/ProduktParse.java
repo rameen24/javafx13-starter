@@ -1,6 +1,8 @@
-package com.sample.Data;
+package com.sample.ProduktData;
 
 import com.sample.Exception.InvalidProduktException;
+import com.sample.ProduktData.ProduktFormat;
+import com.sample.ProduktData.Produkter;
 
 public class ProduktParse {
         public static Produkter parsePerson(String str) throws InvalidProduktException {

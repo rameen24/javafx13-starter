@@ -40,6 +40,7 @@
                                 <cellValueFactory>
                                     <PropertyValueFactory property="komponent" />
                                 </cellValueFactory>
+
                             </TableColumn>
                             <TableColumn fx:id="typecol" minWidth="0.0" onEditCommit="#typeEdited" prefWidth="135.20001220703125" text="Type">
                                 <cellValueFactory>

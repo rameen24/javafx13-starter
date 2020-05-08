@@ -1,6 +1,6 @@
-package com.sample.Data;
+package com.sample.ProduktData;
 
-import com.sample.Data.Produkter;
+import com.sample.ProduktData.Produkter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;

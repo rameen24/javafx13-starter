@@ -1,4 +1,6 @@
-package com.sample.Data;
+package com.sample.ProduktData;
+
+import com.sample.ProduktData.Produkter;
 
 import java.util.List;
 
