@@ -17,12 +17,12 @@ public class Validering {
 
     public static void KomponenentInputValidering(String komponenent) throws InvalidKomponentException {
         if (!Pattern.matches("[A-ZÅÆØ][a-zåæø]*", komponenent)) {
-            throw new InvalidKomponentException("Feil navn format");
+            throw new InvalidKomponentException("Feil  format");
         }
     }
     public static void merkeInputValidering(String merke) throws InvalidMerkeException {
-        if (!Pattern.matches("[A-ZÅÆØ][a-zåæø]* [A-ZÅÆØ][a-zåæø]*", merke)) {
-            throw new InvalidMerkeException("Feil navn format");
+        if (!Pattern.matches("[A-ZÅÆØ][a-zåæø]*", merke)) {
+            throw new InvalidMerkeException("Feil merke format");
         }
     }
         public static void prisValid (int pris) throws InvalidPrisException{

@@ -14,13 +14,12 @@ public class Produkter implements Serializable {
     public Produkter(){
     }
 
-    public Produkter(SimpleStringProperty komponenet, SimpleStringProperty merke,
-                     SimpleStringProperty type, SimpleIntegerProperty pris) {
-        this.komponenet = komponenet;
-        this.merke = merke;
-        this.type = type;
-        this.pris = pris;
-    }
+
+    public Produkter(String type, String merke, int pris, String komponenet) {
+        this.komponenet = new SimpleStringProperty(komponenet);
+        this.merke = new SimpleStringProperty(merke);
+        this.type = new SimpleStringProperty(type);
+        this.pris = new SimpleIntegerProperty(pris); }
 
     public String getKomponenet() {
         return komponenet.get();
@@ -67,6 +66,9 @@ public class Produkter implements Serializable {
     }
 
     public void setPris(int pris) {
+        if(pris < 0) {
+            throw new IllegalArgumentException("intData cannot be negative");
+        }
         this.pris.set(pris);
     }
 }
