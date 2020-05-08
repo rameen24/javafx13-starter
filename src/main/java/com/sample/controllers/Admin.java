@@ -11,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class Admin {
+public class Admin implements Initializable {
     Alert error = new Alert(Alert.AlertType.ERROR);
     Alert warning = new Alert(Alert.AlertType.WARNING);
     private  ObservableList<Datamaskin> datamaskin = FXCollections.observableArrayList();
