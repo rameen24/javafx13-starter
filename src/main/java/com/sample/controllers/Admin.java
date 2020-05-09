@@ -26,6 +26,7 @@ public class Admin implements Initializable {
     Alert warning = new Alert(Alert.AlertType.WARNING);
     private ProdukterCollection collection = new ProdukterCollection();
     private ObservableList<Produkter> etProdukt = FXCollections.observableArrayList();
+    private Produkter produkter;
     @FXML
     private TextField typetxt, merketxt, pristxt, komponenettxt;
 
@@ -51,11 +52,10 @@ public class Admin implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        collection.attachTableView(tableview);
-        komponentercol.setCellFactory(TextFieldTableCell.forTableColumn());
-        typecol.setCellFactory(TextFieldTableCell.forTableColumn());
         merkecol.setCellFactory(TextFieldTableCell.forTableColumn());
-        priscol.setCellFactory(TextFieldTableCell.forTableColumn(new KonverterInterger.Konverter()));
+        priscol.setCellFactory(TextFieldTableCell.forTableColumn(new KonverterInterger()));
+        typecol.setCellFactory(TextFieldTableCell.forTableColumn());
+        komponentercol.setCellFactory(TextFieldTableCell.forTableColumn());
         tableview.setEditable(true);
 
 
@@ -109,19 +109,24 @@ public class Admin implements Initializable {
         boolean merkeValid = Avvik.merkeValid(merke);
 
         boolean allowAddObj = merkeValid && prisValid && typeValid && komponentValid;
-
-        Produkter produktTable = null;
-        if (!allowAddObj) {
-            error.setTitle("Error: Wrong Input");
-            error.setHeaderText(Avvik.melding);
-            error.showAndWait();
+        if (!(merke.isEmpty() || type.isEmpty() || merke.isEmpty())) {
+            Produkter produktTable = null;
+            if (!allowAddObj) {
+                error.setTitle("Error: Wrong Input");
+                error.setHeaderText(Avvik.melding);
+                error.showAndWait();
+            } else {
+                produktTable = new Produkter(type, merke, pris, komponenet);
+                etProdukt.add(produktTable);
+            }
+            return produktTable;
         } else {
-            produktTable = new Produkter(type, merke, pris, komponenet);
-            etProdukt.add(produktTable);
+            error.setTitle("Error");
+            error.setHeaderText("Du har ikke fylt ut alle text feltene");
+            error.showAndWait();
         }
-        return produktTable;
+        return null;
     }
-
     private void resetTxtFields() {
         merketxt.setText("");
         pristxt.setText("");
@@ -131,67 +136,63 @@ public class Admin implements Initializable {
 
 
     @FXML
-    void actionregistrerbtn(ActionEvent event) throws IOException {
-        Produkter objekt = createProduktObjekt();
-        if (objekt != null) {
+    void actionregistrerbtn(ActionEvent event)  {
+        produkter = createProduktObjekt();
+        if (produkter != null) {
+            collection.attachTableView(tableview);
+            System.out.println(produkter.toString());
             resetTxtFields();
-            System.out.println(objekt.toString());
-            collection.addElement(objekt);
         }
     }
-
+    private TableHåndtering entable = new TableHåndtering();
 
     @FXML
-    private void merkeEdited(TableColumn.CellEditEvent<Produkter, String> cellEditEvent) {
-        try {
-            cellEditEvent.getRowValue().setMerke(cellEditEvent.getNewValue());
-        } catch (IllegalArgumentException e) {
+    void komponentEdited(TableColumn.CellEditEvent<Produkter, String> event) {
+        if (!entable.komponentCell(event.getNewValue())) {
             warning.setTitle("Warning");
-            warning.setHeaderText("Ugyldig merke: må skrive merket med stor forbokstav");
+            warning.setHeaderText("Ugyldig format");
             warning.showAndWait();
+            tableview.refresh();
+        } else {
+            event.getRowValue().setKomponenet(event.getNewValue());
         }
+    }
 
-        tableview.refresh();
+
+    @FXML
+    void merkeEdited(TableColumn.CellEditEvent<Produkter, String> event) {
+        if (!entable.merkCell(event.getNewValue())) {
+            warning.setTitle("Warning");
+            warning.setHeaderText("Ugyldig format");
+            warning.showAndWait();
+            tableview.refresh();
+        } else {
+            event.getRowValue().setMerke(event.getNewValue());
+        }
+    }
+    @FXML
+    void typeEdited(TableColumn.CellEditEvent<Produkter, String> event) {
+        if (!entable.typeCell(event.getNewValue())) {
+            warning.setTitle("Warning");
+            warning.setHeaderText("Ugyldig format");
+            warning.showAndWait();
+            tableview.refresh();
+        } else {
+            event.getRowValue().setType(event.getNewValue());
+        }
     }
 
     @FXML
-    private void prisEdited(TableColumn.CellEditEvent<Produkter, Integer> cellEditEvent) {
-        if (KonverterInterger.Konverter.conversionSuccessful) {
+    void prisEdited(TableColumn.CellEditEvent<Produkter, Integer> event) {
+        if (KonverterInterger.conversionSuccessful) {
             try {
-                cellEditEvent.getRowValue().setPris(cellEditEvent.getNewValue());
+                event.getRowValue().setPris(event.getNewValue());
             } catch (IllegalArgumentException e) {
-                warning.setTitle("Warning");
-                warning.setHeaderText("Ugyldig pris: må skrive inn positivt tall");
-                warning.showAndWait();
+                Avvik.showErrorDialog("Du kan ikke taste inn et negativt tall!");
             }
         }
         tableview.refresh();
     }
 
-    @FXML
-    private void typeEdited(TableColumn.CellEditEvent<Produkter, String> cellEditEvent) {
-        try {
-            cellEditEvent.getRowValue().setType(cellEditEvent.getNewValue());
-        } catch (IllegalArgumentException e) {
-            warning.setTitle("Warning");
-            warning.setHeaderText("Ugyldig type");
-            warning.showAndWait();
-        }
-
-        tableview.refresh();
-    }
-
-    @FXML
-    private void komponentEdited(TableColumn.CellEditEvent<Produkter, String> cellEditEvent) {
-        try {
-            cellEditEvent.getRowValue().setKomponenet(cellEditEvent.getNewValue());
-        } catch (IllegalArgumentException e) {
-            warning.setTitle("Warning");
-            warning.setHeaderText("Ugyldig komponent: må skrive inn med stor forbokstav");
-            warning.showAndWait();
-        }
-
-        tableview.refresh();
-    }
-
 }
+

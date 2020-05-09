@@ -38,23 +38,23 @@
                           <columns>
                             <TableColumn fx:id="komponentercol" onEditCommit="#komponentEdited" prefWidth="150.40002536773682" text="Komponent">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="komponent" />
+                                    <PropertyValueFactory property="Komponent" />
                                 </cellValueFactory>
 
                             </TableColumn>
                             <TableColumn fx:id="typecol" minWidth="0.0" onEditCommit="#typeEdited" prefWidth="135.20001220703125" text="Type">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="type" />
+                                    <PropertyValueFactory property="Type" />
                                 </cellValueFactory>
                             </TableColumn>
                               <TableColumn fx:id="merkecol" onEditCommit="#merkeEdited" prefWidth="101.60003662109375" text="Merke">
                                   <cellValueFactory>
-                                      <PropertyValueFactory property="merke" />
+                                      <PropertyValueFactory property="Merke" />
                                   </cellValueFactory>
                               </TableColumn>
                               <TableColumn fx:id="priscol" minWidth="0.0" onEditCommit="#prisEdited" prefWidth="237.5999755859375" text="Pris">
                                   <cellValueFactory>
-                                      <PropertyValueFactory property="pris" />
+                                      <PropertyValueFactory property="Pris" />
                                   </cellValueFactory>
                               </TableColumn>
                           </columns>
