@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 
@@ -52,11 +53,12 @@ public class Admin implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        merkecol.setCellFactory(TextFieldTableCell.forTableColumn());
-        priscol.setCellFactory(TextFieldTableCell.forTableColumn(new KonverterInterger()));
-        typecol.setCellFactory(TextFieldTableCell.forTableColumn());
-        komponentercol.setCellFactory(TextFieldTableCell.forTableColumn());
+        merkecol.setCellValueFactory(new PropertyValueFactory<>("merke"));
+        priscol.setCellValueFactory(new PropertyValueFactory<>("pris"));
+        typecol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        komponentercol.setCellValueFactory(new PropertyValueFactory<>("komponent"));
         tableview.setEditable(true);
+
 
 
         FilteredList<Produkter> filteredList = new FilteredList<>(collection.enMaskin, b -> true);
@@ -144,8 +146,8 @@ public class Admin implements Initializable {
             resetTxtFields();
         }
     }
-    private TableHåndtering entable = new TableHåndtering();
 
+    private TableHåndtering entable = new TableHåndtering();
     @FXML
     void komponentEdited(TableColumn.CellEditEvent<Produkter, String> event) {
         if (!entable.komponentCell(event.getNewValue())) {

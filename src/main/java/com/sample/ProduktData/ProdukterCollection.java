@@ -15,6 +15,7 @@ public class ProdukterCollection {
         }
 
         public void addElement(Produkter objekt) {
+
             enMaskin.add(objekt);
         }
 

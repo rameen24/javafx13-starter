@@ -67,9 +67,17 @@ import java.io.Serializable;
 
         public void setPris(int pris) {
             if(pris < 0) {
-                throw new IllegalArgumentException("intData cannot be negative");
+                throw new IllegalArgumentException("Pris kan ikke være negativ");
             }
             this.pris.set(pris);
+        }
+        public String toString() {
+            return "Produktet {" +
+                    "komponent=" + komponenet +
+                    ",type=" + type +
+                    ", merke=" + merke+
+                    ", pris=" + pris +
+                    '}';
         }
     }
 
