@@ -4,6 +4,7 @@ import com.sample.Avvik.Avvik;
 import com.sample.ProduktData.Produkter;
 import com.sample.ProduktData.ProdukterCollection;
 import com.sample.Validering.KonverterInterger;
+import com.sample.Validering.KonverterString;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,8 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -53,10 +52,10 @@ public class Admin implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        merkecol.setCellValueFactory(new PropertyValueFactory<>("merke"));
-        priscol.setCellValueFactory(new PropertyValueFactory<>("pris"));
-        typecol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        komponentercol.setCellValueFactory(new PropertyValueFactory<>("komponent"));
+        merkecol.setCellFactory(TextFieldTableCell.forTableColumn());
+        priscol.setCellFactory(TextFieldTableCell.forTableColumn(new KonverterInterger()));
+        typecol.setCellFactory(TextFieldTableCell.forTableColumn());
+        komponentercol.setCellFactory(TextFieldTableCell.forTableColumn());
         tableview.setEditable(true);
 
 
@@ -82,9 +81,9 @@ public class Admin implements Initializable {
                     return true;
                 } else if (produktobjekt.getType().toLowerCase().contains(lowerCaseF)) {
                     return true;
-                } else if (produktobjekt.getKomponenet().toLowerCase().contains(lowerCaseF)) {
+                } else if (produktobjekt.getKomponent().toLowerCase().contains(lowerCaseF)) {
                     return true;
-                } else if (produktobjekt.getKomponenet().toLowerCase().contains(lowerCaseF)) {
+                } else if (produktobjekt.getKomponent().toLowerCase().contains(lowerCaseF)) {
                     return true;
                 } else if (produktobjekt.getPris() == pris) {
                     return true;
@@ -111,23 +110,18 @@ public class Admin implements Initializable {
         boolean merkeValid = Avvik.merkeValid(merke);
 
         boolean allowAddObj = merkeValid && prisValid && typeValid && komponentValid;
-        if (!(merke.isEmpty() || type.isEmpty() || merke.isEmpty())) {
-            Produkter produktTable = null;
-            if (!allowAddObj) {
-                error.setTitle("Error: Wrong Input");
-                error.setHeaderText(Avvik.melding);
-                error.showAndWait();
-            } else {
-                produktTable = new Produkter(type, merke, pris, komponenet);
-                etProdukt.add(produktTable);
-            }
-            return produktTable;
-        } else {
-            error.setTitle("Error");
-            error.setHeaderText("Du har ikke fylt ut alle text feltene");
+
+        Produkter produkterTabell = null;
+        if (!allowAddObj) {
+            error.setTitle("Error: Wrong Input");
+            error.setHeaderText(Avvik.melding);
             error.showAndWait();
+        } else {
+            produkterTabell = new Produkter(type,merke,pris,komponenet);
+            etProdukt.add(produkterTabell);
         }
-        return null;
+        return produkterTabell;
+
     }
     private void resetTxtFields() {
         merketxt.setText("");
@@ -136,12 +130,11 @@ public class Admin implements Initializable {
         komponenettxt.setText("");
     }
 
-
     @FXML
     void actionregistrerbtn(ActionEvent event)  {
         produkter = createProduktObjekt();
         if (produkter != null) {
-            collection.attachTableView(tableview);
+            collection.addElement(produkter);
             System.out.println(produkter.toString());
             resetTxtFields();
         }
@@ -156,7 +149,7 @@ public class Admin implements Initializable {
             warning.showAndWait();
             tableview.refresh();
         } else {
-            event.getRowValue().setKomponenet(event.getNewValue());
+            event.getRowValue().setKomponent(event.getNewValue());
         }
     }
 

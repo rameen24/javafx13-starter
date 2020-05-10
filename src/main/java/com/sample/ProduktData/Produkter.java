@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.Serializable;
 
     public class Produkter implements Serializable {
-        private transient SimpleStringProperty komponenet;
+        private transient SimpleStringProperty komponent;
         private transient SimpleStringProperty merke;
         private transient SimpleStringProperty type;
         private transient SimpleIntegerProperty pris;
@@ -16,21 +16,21 @@ import java.io.Serializable;
 
 
         public Produkter(String type, String merke, int pris, String komponenet) {
-            this.komponenet = new SimpleStringProperty(komponenet);
+            this.komponent = new SimpleStringProperty(komponenet);
             this.merke = new SimpleStringProperty(merke);
             this.type = new SimpleStringProperty(type);
             this.pris = new SimpleIntegerProperty(pris); }
 
-        public String getKomponenet() {
-            return komponenet.get();
+        public String getKomponent() {
+            return komponent.get();
         }
 
-        public SimpleStringProperty komponenetProperty() {
-            return komponenet;
+        public SimpleStringProperty komponentProperty() {
+            return komponent;
         }
 
-        public void setKomponenet(String komponenet) {
-            this.komponenet.set(komponenet);
+        public void setKomponent(String komponent) {
+            this.komponent.set(komponent);
         }
 
         public String getMerke() {
@@ -73,7 +73,7 @@ import java.io.Serializable;
         }
         public String toString() {
             return "Produktet {" +
-                    "komponent=" + komponenet +
+                    "komponent=" + komponent +
                     ",type=" + type +
                     ", merke=" + merke+
                     ", pris=" + pris +

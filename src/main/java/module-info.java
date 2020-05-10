@@ -5,4 +5,6 @@ module com.sample {
     opens com.sample.controllers to javafx.fxml;
     exports com.sample;
 
+    exports com.sample.ProduktData;
+    opens com.sample.ProduktData to javafx.base;
 }
