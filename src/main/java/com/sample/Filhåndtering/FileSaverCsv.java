@@ -7,12 +7,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.util.ArrayList;
+
+import com.sample.ProduktData.Produkter;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class FileSaverCsv implements FileSaver{
+
     @Override
-    public void save(Datamaskin registry, String filePath) throws IOException {
+    public void save(ArrayList<Produkter> produkter, File filePath) throws IOException {
         FileChooser fc = new FileChooser();
         fc.setTitle("FileWriter");
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter
@@ -26,8 +30,7 @@ public class FileSaverCsv implements FileSaver{
         File enfile = new File(file.getAbsolutePath());
 
         FileWriter fileWriter = new FileWriter(enfile);
-        fileWriter.write(registry.toString());
+        fileWriter.write(produkter.toString());
         fileWriter.close();
-
     }
 }

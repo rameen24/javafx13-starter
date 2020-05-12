@@ -1,10 +1,12 @@
 package com.sample.Filhåndtering;
 
 import com.sample.Data.Datamaskin;
+import com.sample.ProduktData.Produkter;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public interface FileOpner {
-    public void open(Datamaskin registry, Path filePath) throws IOException;
+    ArrayList<Produkter> open(Path filePath) throws IOException ;
 }

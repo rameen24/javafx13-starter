@@ -7,4 +7,9 @@ module com.sample {
 
     exports com.sample.ProduktData;
     opens com.sample.ProduktData to javafx.base;
+
+    exports com.sample.controllers.Controller_Admin;
+    opens com.sample.controllers.Controller_Admin to javafx.fxml;
+
+
 }

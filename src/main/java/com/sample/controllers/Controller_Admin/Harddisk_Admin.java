@@ -1,10 +1,10 @@
-package com.sample.controllers;
+package com.sample.controllers.Controller_Admin;
 
 import com.sample.Avvik.Avvik;
 import com.sample.ProduktData.Produkter;
 import com.sample.ProduktData.ProdukterCollection;
 import com.sample.Validering.KonverterInterger;
-import com.sample.Validering.KonverterString;
+import com.sample.controllers.TableHåndtering;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,16 +12,19 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class Admin implements Initializable {
+public class Harddisk_Admin implements Initializable {
     Alert error = new Alert(Alert.AlertType.ERROR);
     Alert warning = new Alert(Alert.AlertType.WARNING);
     private ProdukterCollection collection = new ProdukterCollection();
@@ -29,9 +32,6 @@ public class Admin implements Initializable {
     private Produkter produkter;
     @FXML
     private TextField typetxt, merketxt, pristxt, komponenettxt;
-
-    @FXML
-    private Button Registrerbfn;
 
     @FXML
     private TableView<Produkter> tableview;
@@ -46,7 +46,35 @@ public class Admin implements Initializable {
     private TextField sokefelt;
 
     @FXML
-    void sokbtn(ActionEvent event) {
+    void slettrad(ActionEvent event) {
+    }
+    @FXML
+    void vistabelaction(ActionEvent event) {
+    }
+    @FXML
+    void lagretabelaction(ActionEvent event) throws IOException {
+        FileWriter fw = new FileWriter("src/main/resources/Test/harddisk.jobj", false);
+        fw.write(Write(tableview));
+        fw.close();
+
+    }
+
+    private String Write(TableView<Produkter> tableview) throws IOException {
+        String skrive = "";
+
+        try{
+
+            for(int i = 0; i < collection.enMaskin.size(); i++){
+                skrive +=    collection.enMaskin.get(i).getKomponent()+";"
+                        +collection.enMaskin.get(i).getType()+";"
+                        +collection.enMaskin.get(i).getMerke()+";"
+                        +collection.enMaskin.get(i).getPris()+"\n";
+            }
+        }catch (Exception e){
+            throw new IOException("Noe gikk feil");
+
+        }
+        return skrive;
     }
 
 
@@ -190,4 +218,6 @@ public class Admin implements Initializable {
     }
 
 }
+
+
 

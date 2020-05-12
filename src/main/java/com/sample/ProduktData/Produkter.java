@@ -3,6 +3,9 @@ package com.sample.ProduktData;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
     public class Produkter implements Serializable {
@@ -11,7 +14,7 @@ import java.io.Serializable;
         private transient SimpleStringProperty type;
         private transient SimpleIntegerProperty pris;
 
-        public Produkter(){
+        public Produkter() {
         }
 
 
@@ -19,7 +22,8 @@ import java.io.Serializable;
             this.komponent = new SimpleStringProperty(komponenet);
             this.merke = new SimpleStringProperty(merke);
             this.type = new SimpleStringProperty(type);
-            this.pris = new SimpleIntegerProperty(pris); }
+            this.pris = new SimpleIntegerProperty(pris);
+        }
 
         public String getKomponent() {
             return komponent.get();
@@ -66,18 +70,42 @@ import java.io.Serializable;
         }
 
         public void setPris(int pris) {
-            if(pris < 0) {
+            if (pris < 0) {
                 throw new IllegalArgumentException("Pris kan ikke være negativ");
             }
             this.pris.set(pris);
         }
+
         public String toString() {
             return "Produktet {" +
                     "komponent=" + komponent +
                     ",type=" + type +
-                    ", merke=" + merke+
+                    ", merke=" + merke +
                     ", pris=" + pris +
                     '}';
         }
-    }
 
+        private void writeObject(ObjectOutputStream s) throws IOException {
+            s.defaultWriteObject();
+            s.writeUTF(getKomponent());
+            s.writeUTF(getType());
+            s.writeUTF(getMerke());
+            s.writeInt(getPris());
+
+        }
+        private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+            String komponenet = s.readUTF();
+            String type = s.readUTF();
+            String merke = s.readUTF();
+            int pris = s.readInt();
+
+
+            this.pris = new SimpleIntegerProperty(pris);
+            this.merke = new SimpleStringProperty(merke);
+            this.type = new SimpleStringProperty(type);
+            this.komponent = new SimpleStringProperty(komponenet);
+
+        }
+
+
+    }

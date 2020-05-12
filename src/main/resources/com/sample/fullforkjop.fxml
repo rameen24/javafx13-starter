@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="522.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.FullførKjøp">
+<AnchorPane prefHeight="522.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.Controller_Bruker.FullførKjøp">
    <children>
       <SplitPane dividerPositions="0.655893536121673" prefHeight="520.0" prefWidth="738.0">
         <items>

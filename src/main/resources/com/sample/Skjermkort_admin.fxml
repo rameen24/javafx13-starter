@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.Controller_Admin.Skjermkort_Admin">
+    <top>
+        <fx:include fx:id="Menybar" source="meny_admin.fxml" />
+    </top>
+    <center>
+        <AnchorPane prefHeight="538.0" prefWidth="674.0">
+            <children>
+                <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="582.0" prefWidth="652.0">
+                    <children>
+                        <SplitPane dividerPositions="0.34324133050247696" layoutX="12.0" layoutY="7.0" orientation="VERTICAL" prefHeight="567.0" prefWidth="628.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.0" prefWidth="626.0">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="87.0" text="Komponent" />
+                                        <Label layoutX="14.0" layoutY="49.0" prefHeight="18.0" prefWidth="87.0" text="Type" />
+                                        <Label layoutX="14.0" layoutY="125.0" prefHeight="18.0" prefWidth="87.0" text="Pris" />
+                                        <TextField fx:id="pristxt" layoutX="101.0" layoutY="121.0" />
+                                        <TextField fx:id="merketxt" layoutX="101.0" layoutY="83.0" />
+                                        <Label layoutX="14.0" layoutY="86.0" prefHeight="18.0" prefWidth="87.0" text="Merke" />
+                                        <Button layoutX="182.0" layoutY="156.0" mnemonicParsing="false" onAction="#slettrad" prefHeight="26.0" prefWidth="67.0" text="Slett" />
+                                        <Button layoutX="101.0" layoutY="156.0" mnemonicParsing="false" onAction="#actionregistrerbtn" prefHeight="26.0" prefWidth="67.0" text="Registrer" />
+                                        <TextField fx:id="sokefelt" layoutX="466.0" layoutY="11.0" prefHeight="26.0" prefWidth="149.0" promptText="Søk" />
+                                        <TextField fx:id="typetxt" layoutX="101.0" layoutY="45.0" />
+                                        <TextField fx:id="komponenettxt" layoutX="101.0" layoutY="11.0" />
+                                        <Button fx:id="lagretabel" layoutX="548.0" layoutY="156.0" mnemonicParsing="false" onAction="#lagretabelaction" prefHeight="26.0" prefWidth="67.0" text="Lagre" />
+                                        <Button fx:id="vistabel" layoutX="466.0" layoutY="156.0" mnemonicParsing="false" onAction="#vistabelaction" prefHeight="26.0" prefWidth="67.0" text="Vis tabel" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="626.0">
+                                    <children>
+                                        <TableView fx:id="tableview" editable="true" layoutX="-1.0" layoutY="1.0" prefHeight="369.0" prefWidth="628.0">
+                                            <columns>
+                                                <TableColumn fx:id="komponentercol" onEditCommit="#komponentEdited" prefWidth="150.40002536773682" text="Komponent">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="komponent" />
+                                                    </cellValueFactory>
+                                                    <cellFactory>
+                                                        <TextFieldTableCell fx:factory="forTableColumn" />
+                                                    </cellFactory>
+                                                </TableColumn>
+                                                <TableColumn fx:id="typecol" minWidth="0.0" onEditCommit="#typeEdited" prefWidth="135.20001220703125" text="Type">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="type" />
+                                                    </cellValueFactory>
+                                                    <cellFactory>
+                                                        <TextFieldTableCell fx:factory="forTableColumn" />
+                                                    </cellFactory>
+                                                </TableColumn>
+                                                <TableColumn fx:id="merkecol" onEditCommit="#merkeEdited" prefWidth="101.60003662109375" text="Merke">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="merke" />
+                                                    </cellValueFactory>
+                                                    <cellFactory>
+                                                        <TextFieldTableCell fx:factory="forTableColumn" />
+                                                    </cellFactory>
+                                                </TableColumn>
+                                                <TableColumn fx:id="priscol" minWidth="0.0" onEditCommit="#prisEdited" prefWidth="237.5999755859375" text="Pris">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="pris" />
+                                                    </cellValueFactory>
+                                                    <cellFactory>
+                                                        <TextFieldTableCell fx:factory="forTableColumn" />
+                                                    </cellFactory>
+                                                </TableColumn>
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center><bottom>
+    <Label layoutX="96.0" layoutY="14.0" prefHeight="27.0" prefWidth="512.0" text="Admin siden for skjermkort, du kan legge til, fjerne og slette">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label></bottom>
+</BorderPane>
