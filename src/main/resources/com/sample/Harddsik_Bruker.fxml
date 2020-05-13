@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.Controller_Bruker.Harddisk_Bruker">
+    <top>
+        <fx:include fx:id="Menybar" source="meny_bruker.fxml" />
+    </top>
+    <center>
+      <TableView fx:id="tableview" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="komponenetcol" prefWidth="165.60003662109375" text="Komponenet" />
+          <TableColumn fx:id="typecol" prefWidth="157.5999755859375" text="Type" />
+            <TableColumn fx:id="merkecol" prefWidth="156.79998779296875" text="Merke" />
+            <TableColumn fx:id="priscol" prefWidth="120.0" text="Pris" />
+        </columns>
+      </TableView>
+   </center>
+    <bottom>
+        <HBox prefHeight="32.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="visprodukter" mnemonicParsing="false" onAction="#visprodukteraction" prefHeight="26.0" prefWidth="148.0" text="Vis Produkt" />
+                <Button fx:id="leggtilhandlekurv" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#leggtilhandlekurvaction" prefHeight="26.0" prefWidth="148.0" text="Legg til i handleurven" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -11,5 +11,8 @@ module com.sample {
     exports com.sample.controllers.Controller_Admin;
     opens com.sample.controllers.Controller_Admin to javafx.fxml;
 
+    exports com.sample.controllers.Controller_Bruker;
+    opens com.sample.controllers.Controller_Bruker to javafx.fxml;
+
 
 }

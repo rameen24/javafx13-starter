@@ -1,6 +1,7 @@
 package com.sample.controllers.Controller_Admin;
 
 import com.sample.Avvik.Avvik;
+import com.sample.Filhåndtering.FileOpnerJobj;
 import com.sample.Filhåndtering.FileSaver;
 import com.sample.ProduktData.Produkter;
 import com.sample.ProduktData.ProdukterCollection;
@@ -20,6 +21,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +34,7 @@ public class Prossesor_Admin implements Initializable {
     private ProdukterCollection collection = new ProdukterCollection();
     private ObservableList<Produkter> etProdukt = FXCollections.observableArrayList();
     private Produkter produkter;
+
     @FXML
     private TextField typetxt, merketxt, pristxt, komponenettxt;
 
@@ -123,6 +126,8 @@ public class Prossesor_Admin implements Initializable {
         SortedList<Produkter> sortertData = new SortedList<>(filteredList);
         sortertData.comparatorProperty().bind(tableview.comparatorProperty());
         tableview.setItems(sortertData);
+
+
     }
 
 

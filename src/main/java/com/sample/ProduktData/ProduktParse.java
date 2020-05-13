@@ -25,6 +25,7 @@ public class ProduktParse {
 
             return new Produkter(type, merke, pris, komponenet);
         }
+
     }
 
 
