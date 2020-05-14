@@ -4,18 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.MainController">
-   <children>
-      <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="600.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.MainController">
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="533.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="600.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <Button layoutX="56.0" layoutY="245.0" mnemonicParsing="false" onAction="#switchAdmin" prefHeight="30.0" prefWidth="156.0" text="Admin" />
-      <Button layoutX="333.0" layoutY="245.0" mnemonicParsing="false" onAction="#switchOpprettBruker" prefHeight="30.0" prefWidth="156.0" text="Bruker" />
-      <Label layoutX="112.0" layoutY="117.0" prefHeight="84.0" prefWidth="312.0" text="LAG DIN EGEN DATAMASKIN">
-         <font>
-            <Font name="Berlin Sans FB" size="24.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+            <Button layoutX="56.0" layoutY="245.0" mnemonicParsing="false" onAction="#switchAdmin" prefHeight="30.0" prefWidth="156.0" text="Admin" />
+            <Button layoutX="333.0" layoutY="245.0" mnemonicParsing="false" onAction="#switchOpprettBruker" prefHeight="30.0" prefWidth="156.0" text="Bruker" />
+            <Label layoutX="112.0" layoutY="117.0" prefHeight="84.0" prefWidth="312.0" text="LAG DIN EGEN DATAMASKIN">
+               <font>
+                  <Font name="Berlin Sans FB" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

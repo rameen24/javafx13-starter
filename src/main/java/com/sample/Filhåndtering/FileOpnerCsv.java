@@ -12,20 +12,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class FileOpnerCsv implements FileOpner{
+public class FileOpnerCsv implements FileOpner {
     @Override
     public ArrayList<Produkter> open(ArrayList<Produkter> produkter, Path filePath) throws IOException, InvalidProduktException {
-        File file = new File (String.valueOf(filePath));
+        File file = new File(String.valueOf(filePath));
         BufferedReader br = null;
 
         int teller = 0;
-        if(file.exists()){
+        if (file.exists()) {
             String linjeTabell;
             br = Files.newBufferedReader(Paths.get(String.valueOf(filePath)));
 
-            while ((linjeTabell = br.readLine()) != null){
+            while ((linjeTabell = br.readLine()) != null) {
                 teller++;
-                if(teller == 1){
+                if (teller == 1) {
                     continue;
                 }
                 produkter.add(ProduktParse.parsePerson(linjeTabell));
@@ -36,4 +36,5 @@ public class FileOpnerCsv implements FileOpner{
     }
 
 }
+
 
