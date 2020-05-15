@@ -3,8 +3,12 @@ package com.sample.ProduktData;
 import com.sample.Exception.InvalidProduktException;
 import com.sample.ProduktData.ProduktFormat;
 import com.sample.ProduktData.Produkter;
+import javafx.scene.control.TableView;
+
+import java.io.IOException;
 
 public class ProduktParse {
+
         public static Produkter parsePerson(String str) throws InvalidProduktException {
             //En String array av linje, det indeksene plasseres etter DELIMITER tegnet (;)
             String[] linjeArray = str.split(ProduktFormat.DELIMITER);

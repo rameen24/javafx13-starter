@@ -2,6 +2,7 @@ package com.sample.ProduktData;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -105,6 +106,14 @@ import java.io.Serializable;
             this.type = new SimpleStringProperty(type);
             this.komponent = new SimpleStringProperty(komponenet);
 
+        }
+
+        public static double totalpris  (ObservableList<Produkter> produkt){
+            double totalprisen = 0;
+            for (Produkter etprodukt : produkt){
+                totalprisen += etprodukt.getPris();
+            }
+            return totalprisen;
         }
 
 

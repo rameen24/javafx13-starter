@@ -1,12 +1,10 @@
 package com.sample.controllers.Controller_Admin;
 
 import com.sample.Avvik.Avvik;
-import com.sample.Filhåndtering.FileOpnerJobj;
-import com.sample.Filhåndtering.FileSaver;
+import com.sample.Filhåndtering.ThreadHåndtering;
 import com.sample.ProduktData.Produkter;
 import com.sample.ProduktData.ProdukterCollection;
 import com.sample.Validering.KonverterInterger;
-import com.sample.Validering.KonverterString;
 import com.sample.controllers.TableHåndtering;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,14 +14,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.FileChooser;
 
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -51,35 +45,52 @@ public class Prossesor_Admin implements Initializable {
     private TextField sokefelt;
 
     @FXML
-    void slettrad(ActionEvent event) {
-    }
-    @FXML
     void vistabelaction(ActionEvent event) {
+        BufferedReader bufferedReader;
+        String Delimiter = ";";
+
+        try {
+            ThreadHåndtering thread = new ThreadHåndtering("src/main/resources/Test/prosessor.jobj") ;
+            bufferedReader = new BufferedReader(thread.call());
+
+            String linje;
+            while ((linje = bufferedReader.readLine()) != null) {
+                String[] produkt = linje.split(Delimiter, -1);
+                Produkter produkter = new Produkter(produkt[0], produkt[1],Integer.parseInt(produkt[3]),produkt[2]);
+                collection.enMaskin.add(produkter);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
     @FXML
     void lagretabelaction(ActionEvent event) throws IOException {
         FileWriter fw = new FileWriter("src/main/resources/Test/prosessor.jobj", false);
-        fw.write(Write(tableview));
+        fw.write(toString(tableview));
         fw.close();
 
     }
 
-    private String Write(TableView<Produkter> tableview) throws IOException {
-        String skrive = "";
-
+    private String toString(TableView<Produkter> tableview) throws IOException {
+        String write = " ";
         try{
 
-            for(int i = 0; i < collection.enMaskin.size(); i++){
-                skrive +=    collection.enMaskin.get(i).getKomponent()+";"
-                        +collection.enMaskin.get(i).getType()+";"
-                        +collection.enMaskin.get(i).getMerke()+";"
-                        +collection.enMaskin.get(i).getPris()+"\n";
+            for(int x = 0; x < collection.enMaskin.size(); x++){
+                write +=    collection.enMaskin.get(x).getKomponent()+";"
+                        +collection.enMaskin.get(x).getType()+";"
+                        +collection.enMaskin.get(x).getMerke()+";"
+                        +collection.enMaskin.get(x).getPris()+";"+
+                        "\n";
             }
         }catch (Exception e){
             throw new IOException("Noe gikk feil");
 
         }
-        return skrive;
+        return write;
     }
 
 
@@ -91,7 +102,7 @@ public class Prossesor_Admin implements Initializable {
         komponentercol.setCellFactory(TextFieldTableCell.forTableColumn());
         tableview.setEditable(true);
 
-
+        tableview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         FilteredList<Produkter> filteredList = new FilteredList<>(collection.enMaskin, b -> true);
         sokefelt.textProperty().addListener((observable, oldValue, newValue) -> {

@@ -3,12 +3,15 @@ package com.sample.controllers.Controller_Bruker;
 import com.sample.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class VelgKomponenter {
+public class VelgKomponenter implements Initializable {
 
     @FXML
     private CheckBox musvelg;
@@ -30,4 +33,8 @@ public class VelgKomponenter {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

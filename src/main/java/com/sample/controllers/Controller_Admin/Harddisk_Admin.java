@@ -1,6 +1,10 @@
 package com.sample.controllers.Controller_Admin;
 
 import com.sample.Avvik.Avvik;
+import com.sample.Exception.InvalidProduktException;
+import com.sample.Filhåndtering.FileSaverJobj;
+import com.sample.Filhåndtering.ThreadHåndtering;
+import com.sample.ProduktData.ProduktParse;
 import com.sample.ProduktData.Produkter;
 import com.sample.ProduktData.ProdukterCollection;
 import com.sample.Validering.KonverterInterger;
@@ -12,17 +16,15 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+
+import static javax.swing.JOptionPane.showInputDialog;
 
 public class Harddisk_Admin implements Initializable {
     Alert error = new Alert(Alert.AlertType.ERROR);
@@ -30,6 +32,8 @@ public class Harddisk_Admin implements Initializable {
     private ProdukterCollection collection = new ProdukterCollection();
     private ObservableList<Produkter> etProdukt = FXCollections.observableArrayList();
     private Produkter produkter;
+
+
     @FXML
     private TextField typetxt, merketxt, pristxt, komponenettxt;
 
@@ -45,38 +49,55 @@ public class Harddisk_Admin implements Initializable {
     @FXML
     private TextField sokefelt;
 
-    @FXML
-    void slettrad(ActionEvent event) {
-    }
+
     @FXML
     void vistabelaction(ActionEvent event) {
+        BufferedReader bufferedReader;
+        String Delimiter = ";";
+
+        try {
+        ThreadHåndtering thread = new ThreadHåndtering("src/main/resources/Test/harddisk.jobj") ;
+        bufferedReader = new BufferedReader(thread.call());
+
+        String linje;
+        while ((linje = bufferedReader.readLine()) != null) {
+            String[] produkt = linje.split(Delimiter, -1);
+            Produkter produkter = new Produkter(produkt[0], produkt[1],Integer.parseInt(produkt[3]),produkt[2]);
+            collection.enMaskin.add(produkter);
+        }
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
+
     @FXML
     void lagretabelaction(ActionEvent event) throws IOException {
         FileWriter fw = new FileWriter("src/main/resources/Test/harddisk.jobj", false);
-        fw.write(Write(tableview));
+        fw.write(toString(tableview));
         fw.close();
 
     }
 
-    private String Write(TableView<Produkter> tableview) throws IOException {
-        String skrive = "";
-
+    private String toString(TableView<Produkter> tableview) throws IOException {
+        String write = " ";
         try{
 
-            for(int i = 0; i < collection.enMaskin.size(); i++){
-                skrive +=    collection.enMaskin.get(i).getKomponent()+";"
-                        +collection.enMaskin.get(i).getType()+";"
-                        +collection.enMaskin.get(i).getMerke()+";"
-                        +collection.enMaskin.get(i).getPris()+"\n";
+            for(int x = 0; x < collection.enMaskin.size(); x++){
+                write +=    collection.enMaskin.get(x).getKomponent()+";"
+                        +collection.enMaskin.get(x).getType()+";"
+                        +collection.enMaskin.get(x).getMerke()+";"
+                        +collection.enMaskin.get(x).getPris()+";"+
+                        "\n";
             }
         }catch (Exception e){
             throw new IOException("Noe gikk feil");
 
         }
-        return skrive;
+        return write;
     }
-
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,7 +107,7 @@ public class Harddisk_Admin implements Initializable {
         komponentercol.setCellFactory(TextFieldTableCell.forTableColumn());
         tableview.setEditable(true);
 
-
+        tableview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         FilteredList<Produkter> filteredList = new FilteredList<>(collection.enMaskin, b -> true);
         sokefelt.textProperty().addListener((observable, oldValue, newValue) -> {

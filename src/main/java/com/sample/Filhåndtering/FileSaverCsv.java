@@ -13,9 +13,9 @@ import com.sample.ProduktData.Produkter;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class FileSaverCsv implements FileSaver{
+public class FileSaverCsv {
 
-    @Override
+
     public void save(ArrayList<Produkter> produkter, File filePath) throws IOException {
         FileChooser fc = new FileChooser();
         fc.setTitle("FileWriter");

@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.Logginn">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
@@ -40,4 +39,7 @@
       </children>
       </AnchorPane>
    </center>
+   <top>
+      <Label prefHeight="18.0" prefWidth="313.0" text="Passordet og brukernavn for superbruker er &quot;Admin123&quot;" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>
