@@ -17,16 +17,10 @@ public class ThreadHåndtering extends Task<FileReader> {
     @Override
         public FileReader call() throws InterruptedException {
             FileReader fileReader = null;
-            try {
-                fileReader = new FileReader(path);
-                Thread.sleep(500);
-            }
+        fileReader = new FileReader(path);
+        Thread.sleep(500);
 
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            return fileReader;
+        return fileReader;
 
         }
     }

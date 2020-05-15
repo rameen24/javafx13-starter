@@ -3,10 +3,25 @@ package com.sample.Filhåndtering;
 import com.sample.ProduktData.Produkter;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Reader;
 import java.util.List;
 
-public class FileReader {
+public class FileReader extends Reader {
+    public FileReader(String path) {
+    }
+
+    @Override
+    public int read(char[] cbuf, int off, int len) throws IOException {
+        return 0;
+    }
+
+    @Override
+    public void close() throws IOException {
+
+    }
+
     public static class readFile {
 
         public static List<Produkter> readSerializedFile(){
